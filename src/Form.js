@@ -41,22 +41,22 @@ function MyForm(props){
             </label>
           </div>
           <div>
-            <label>Email</label>
-            <input
-              type="email"
-              name="email"
-              placeholder="Enter email"
-              value={teamMember.email}
-              onChange={handleChange}
-            />
-          </div>
-          <div>
             <label>Role</label>
             <input
               type="text"
               name="role"
               placeholder="Enter role"
               value={teamMember.role}
+              onChange={handleChange}
+            />
+          </div>
+          <div>
+            <label>Email</label>
+            <input
+              type="email"
+              name="email"
+              placeholder="Enter email"
+              value={teamMember.email}
               onChange={handleChange}
             />
           </div>
