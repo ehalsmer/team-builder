@@ -3,47 +3,61 @@ import React from 'react';
 import { Form } from "semantic-ui-react"
 import {useState} from 'react';
 
-function MyForm(){
+function MyForm(props){
+    console.log(props);
+
+    const [teamMember, setTeamMember] = useState({name: "", email: "", role: ""})
+
+
+    function handleChange(event){
+      const newTeamMember = { ...teamMember, [event.target.name]: event.target.value };
+      console.log(newTeamMember);
+      setTeamMember(newTeamMember);
+    }
+
+    function handleSubmit(event){
+      // console.log('oops')
+      event.preventDefault();
+      const onSubmit = props.onSubmit; 
+      onSubmit(teamMember); // Calling function in App.js
+    }
+
     return(
-        <Form>
+        <Form onSubmit={handleSubmit}>
         <fieldset>
           <legend>Signup</legend>
           <div>
-            <label for="username">
-              Username
+            <label>
+              Name
               <div>
                 <input
                   type="text"
-                  className="form-control"
-                  name="username"
-                  placeholder="Enter your username"
-                  // value={user.username}
-                  // onChange={handleChange}
+                  name="name"
+                  placeholder="Enter your name"
+                  value={teamMember.name}
+                  onChange={handleChange}
                 />
               </div>
             </label>
           </div>
           <div>
-            <label for="exampleInputEmail1">Email address</label>
+            <label>Email</label>
             <input
               type="email"
-              className="form-control"
               name="email"
-              aria-describedby="emailHelp"
               placeholder="Enter email"
-              // value={user.email}
-              // onChange={handleChange}
+              value={teamMember.email}
+              onChange={handleChange}
             />
           </div>
           <div>
-            <label for="exampleInputPassword1">Password</label>
+            <label>Role</label>
             <input
-              type="password"
-              className="form-control"
-              name="password"
-              placeholder="Password"
-              // onChange={handleChange}
-              // value={user.password}
+              type="text"
+              name="role"
+              placeholder="Enter role"
+              value={teamMember.role}
+              onChange={handleChange}
             />
           </div>
           <button type="submit">
