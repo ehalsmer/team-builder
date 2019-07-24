@@ -39,7 +39,7 @@ function App() {
         </List>
       </Container>
       <Header as="h2">Add Team Member:</Header>
-      <MyForm onSubmit={onSubmit}/>
+      <MyForm toEdit={toEdit} onSubmit={onSubmit}/>
     </Container>
   );
 }

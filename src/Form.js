@@ -1,13 +1,17 @@
 import React from 'react';
 // import {BrowserRouter as Router} from 'react-router-dom'; // don't forget yarn add react-router-dom also
 import { Form } from "semantic-ui-react"
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 
 function MyForm(props){
     console.log(props);
 
     const [teamMember, setTeamMember] = useState({name: "", email: "", role: ""})
 
+    useEffect(()=>{
+      // console.log('toEdit is', props.toEdit)
+      setTeamMember(props.toEdit);
+    },[props.toEdit])
 
     function handleChange(event){
       const newTeamMember = { ...teamMember, [event.target.name]: event.target.value };
