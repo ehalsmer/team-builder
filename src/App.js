@@ -2,6 +2,7 @@ import React from 'react';
 // import {BrowserRouter as Router} from 'react-router-dom'; // don't forget yarn add react-router-dom also
 import { List, Container, Button, Header } from 'semantic-ui-react';
 import MyForm from './Form';
+import EditForm from './EditForm'
 import {useState} from 'react';
 // import './App.css';
 import "semantic-ui-css/semantic.min.css";
@@ -16,6 +17,14 @@ function App() {
     setTeam([...team, teamMember])
   }
 
+  function editMember(member){
+      console.log('previous state?', toEdit);
+      console.log('Editing state:', member);
+      const teamMinusOld = team.filter((member)=>member.name !== toEdit.name)
+      setTeam([...teamMinusOld, member])
+    }
+  
+
   return (
     <Container>
       <Header as='h1'>Team</Header>
@@ -26,7 +35,13 @@ function App() {
               <List.Header>
               {/* <List.Icon name="user"/> */}
               {teamMember.name}
-              <Button style={{display: 'inline', margin: '10px'}} compact size='mini' onClick={()=>setToEdit(teamMember)}>Edit</Button>
+              <Button 
+                style={{display: 'inline', margin: '10px'}} 
+                compact 
+                size='mini' 
+                onClick={()=>setToEdit(teamMember)}>
+                  Edit
+              </Button>
               </List.Header>
               <List.Content>
               {teamMember.role}
@@ -38,8 +53,9 @@ function App() {
             )}
         </List>
       </Container>
-      <Header as="h2">Add Team Member:</Header>
-      <MyForm toEdit={toEdit} onSubmit={onSubmit}/>
+      <Header as="h2">Forms:</Header>
+      <MyForm editMember={editMember} onSubmit={onSubmit}/>
+      <EditForm toEdit={toEdit} editMember={editMember}/>
     </Container>
   );
 }

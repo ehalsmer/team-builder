@@ -8,6 +8,11 @@ function MyForm(props){
 
     const [teamMember, setTeamMember] = useState({name: "", email: "", role: ""})
 
+    useEffect(()=>{
+      console.log('toEdit is', props.toEdit)
+      setTeamMember(props.toEdit);
+    },[props.toEdit])
+
     function handleChange(event){
       const newTeamMember = { ...teamMember, [event.target.name]: event.target.value };
       console.log(newTeamMember);
@@ -18,15 +23,13 @@ function MyForm(props){
       // console.log('oops')
       // Insert if statement to branch for edit or inital submit
       event.preventDefault();
-      const onSubmit = props.onSubmit; 
-      onSubmit(teamMember); // Calling function in App.js
-      
+      props.editMember(teamMember);
     }
 
     return(
         <Form onSubmit={handleSubmit}>
         <fieldset>
-          <legend>Add Team Member</legend>
+          <legend>Edit Team Member</legend>
           <div>
             <label>
               Name
